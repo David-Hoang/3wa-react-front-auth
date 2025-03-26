@@ -17,6 +17,7 @@ const MyRouter = () => {
                 <Route path="/contact" element={<Contact />} />
                 <Route path="/register" element={<Register />} />
                 <Route path="/login" element={<Login />} />
+                <Route path="*" element={<h1>404 Not Found</h1>} />
             </Routes>
         </>
     )
