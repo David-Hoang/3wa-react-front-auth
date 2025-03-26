@@ -1,32 +1,16 @@
 import { useEffect, useState } from "react";
-import axios from 'axios';
 import "./App.css";
+import { ServicesContext } from './context/ServicesContext.jsx';
+import { useContext } from 'react'
+
 
 function App() {
 
-    const [services, setServices] = useState(null);
-    const [error, setError] = useState("");
-
-
-    const fetching = async () => {
-        try {
-            const getServices = await axios.get('http://localhost:8000/api/services');
-            setServices(getServices.data);
-            console.log(getServices.data);
-            
-        } catch (error) {
-            setError(error.message);
-            console.error(error.message);
-        }
-    };
-    
-    useEffect(() => {
-        fetching();
-    }, []);
+    const [services, setServices, error, setError] = useContext(ServicesContext);
 
     return (
         <main className="flex flex-col gap-5">
-            <h1 className="text-2xl py-5 font-semibold">Liste des évènements</h1>
+            <h1 className="text-2xl py-5 font-semibold">Liste des services</h1>
             {error ? (             
                     <p>{error}</p>
                 ) : !services ? ( // Vérification si services est null ou undefined
@@ -63,7 +47,6 @@ function App() {
             }
         </main>
     )
-    
 }
 
 export default App;

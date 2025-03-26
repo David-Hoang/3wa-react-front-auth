@@ -4,6 +4,7 @@ import Profile from "./pages/Profile";
 import NavBar from './components/NavBar.jsx';
 import Register from "./pages/Register.jsx";
 import Contact from "./pages/Contact.jsx";
+import Login from "./pages/Login.jsx";
 
 const MyRouter = () => {
 
@@ -15,6 +16,7 @@ const MyRouter = () => {
                 <Route path="/profile" element={<Profile />} />
                 <Route path="/contact" element={<Contact />} />
                 <Route path="/register" element={<Register />} />
+                <Route path="/login" element={<Login />} />
             </Routes>
         </>
     )

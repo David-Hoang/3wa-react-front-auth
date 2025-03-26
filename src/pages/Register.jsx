@@ -42,7 +42,7 @@ const Register = () => {
                 <form onSubmit={handleRegistration} className="space-y-6">
                     <div>
                         <label
-                            for="first_name"
+                            htmlFor="first_name"
                             className="block text-sm/6 font-medium text-gray-900 text-start"
                         >
                             Votre prénom
@@ -61,7 +61,7 @@ const Register = () => {
                     </div>
                     <div>
                         <label
-                            for="last_name"
+                            htmlFor="last_name"
                             className="block text-sm/6 font-medium text-gray-900 text-start"
                         >
                             Votre nom de famille
@@ -80,7 +80,7 @@ const Register = () => {
                     </div>
                     <div>
                         <label
-                            for="email"
+                            htmlFor="email"
                             className="block text-sm/6 font-medium text-gray-900 text-start"
                         >
                             Votre adresse email
@@ -90,7 +90,7 @@ const Register = () => {
                                 type="email"
                                 name="email"
                                 id="email"
-                                autocomplete="email"
+                                autoComplete="email"
                                 required
                                 className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
                                 onChange={e => setEmail(e.target.value)}
@@ -99,28 +99,18 @@ const Register = () => {
                     </div>
 
                     <div>
-                        <div className="flex items-center justify-between">
-                            <label
-                                for="password"
-                                className="block text-sm/6 font-medium text-gray-900"
-                            >
-                                Votre mot de passe
-                            </label>
-                            <div className="text-sm">
-                                <a
-                                    href="#"
-                                    className="font-semibold text-indigo-600 hover:text-indigo-500"
-                                >
-                                    Mot de passe oublié ?
-                                </a>
-                            </div>
-                        </div>
+                        <label
+                                htmlFor="last_name"
+                            className="block text-sm/6 font-medium text-gray-900 text-start"
+                        >
+                            Votre mot de passe
+                        </label>
                         <div className="mt-2">
                             <input
                                 type="password"
                                 name="password"
                                 id="password"
-                                autocomplete="current-password"
+                                autoComplete="current-password"
                                 required
                                 className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
                                 onChange={e => setPassword(e.target.value)}
