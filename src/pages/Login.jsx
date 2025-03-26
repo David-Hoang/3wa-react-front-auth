@@ -1,15 +1,40 @@
 import axios from "axios";
-import { useState } from 'react';
+import { useState, useContext } from 'react';
+import { AuthContext } from "../context/AuthContext";
 
 function Login() {
 
+    const [isAuthenticated, setIsAuthenticated] = useContext(AuthContext);
+
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-
+    const [errorEmail, setErrorEmail] = useState("");
+    const [errorPassword, setErrorPassword] = useState("");
     const handleLogin = async (e) => {
         e.preventDefault();
-        console.log(email, password);
-        
+
+        setErrorEmail("");
+        setErrorPassword("");
+
+        try {
+            if (!email) return setErrorEmail("Veuillez renseigner votre adresse email.");
+            if (!password) return setErrorPassword("Veuillez renseigner un mot de passe.");
+            
+            const response = await axios.post("http://localhost:8000/api/login", {
+                    email,
+                    password,
+                })
+
+            if(response.status === 200){
+                console.log(response);
+                let userToken = response.data.token;
+                localStorage.setItem("userToken", userToken);
+                setIsAuthenticated(true);
+                navigate('/');
+            }
+        } catch (error) {
+            
+        }
     }
 
     return (
