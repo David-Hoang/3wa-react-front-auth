@@ -3,7 +3,6 @@ import "./App.css";
 import { ServicesContext } from './context/ServicesContext.jsx';
 import { useContext } from 'react'
 
-
 function App() {
 
     const [services, setServices, error, setError] = useContext(ServicesContext);

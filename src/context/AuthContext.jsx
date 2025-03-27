@@ -1,4 +1,4 @@
-import { useState, createContext } from "react";
+import { useState, createContext, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router";
 
@@ -11,6 +11,16 @@ export const AuthController = ({ children }) => {
     const [errorPassword, setErrorPassword] = useState("");
     const [error, setError] = useState("");
     const [isLoading, setIsLoading] = useState(false);
+
+    console.log("isAuth : " + isAuthenticated)
+    
+    useEffect(() => {
+        let token = localStorage.getItem("userToken");
+
+        if(token){
+            setIsAuthenticated(true);
+        }
+    })
 
     const handleLogin = async (e, formUser) => {
         e.preventDefault();
@@ -34,7 +44,6 @@ export const AuthController = ({ children }) => {
             );
 
             if (response.status === 200) {
-                console.log(response);
                 let userToken = response.data.token;
                 localStorage.setItem("userToken", userToken);
                 setIsAuthenticated(true);
@@ -51,7 +60,17 @@ export const AuthController = ({ children }) => {
         }
     };
 
+    const handleLogout = async () => {
+
+        try {
+            localStorage.removeItem("userToken");
+            setIsAuthenticated(false);
+        } catch (error) {
+            console.log(error);
+        }
+    }
     return (
+        
         <AuthContext.Provider
             value={{
                 isAuthenticated,
@@ -60,7 +79,8 @@ export const AuthController = ({ children }) => {
                 errorEmail,
                 errorPassword,
                 error,
-                isLoading
+                isLoading,
+                handleLogout
             }}
         >
             {children}
