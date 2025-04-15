@@ -11,6 +11,7 @@ export const AuthController = ({ children }) => {
     const [errorPassword, setErrorPassword] = useState("");
     const [error, setError] = useState("");
     const [isLoading, setIsLoading] = useState(false);
+    const [userToken, setUserToken] = useState("");
 
     console.log("isAuth : " + isAuthenticated)
     
@@ -19,8 +20,9 @@ export const AuthController = ({ children }) => {
 
         if(token){
             setIsAuthenticated(true);
+            setUserToken(token);
         }
-    })
+    }, [])
 
     const handleLogin = async (e, formUser) => {
         e.preventDefault();
@@ -65,6 +67,7 @@ export const AuthController = ({ children }) => {
         try {
             localStorage.removeItem("userToken");
             setIsAuthenticated(false);
+            navigate("/");
         } catch (error) {
             console.log(error);
         }
@@ -80,7 +83,8 @@ export const AuthController = ({ children }) => {
                 errorPassword,
                 error,
                 isLoading,
-                handleLogout
+                handleLogout,
+                userToken
             }}
         >
             {children}
