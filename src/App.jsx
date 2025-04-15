@@ -19,8 +19,8 @@ function App() {
                     <p>Aucun évènement en cours</p>
                 ) : ( <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
                         {services.map(service => (
-                            <Link to={`/service/${service._id}`}>
-                                <li key={service._id} className="col-span-1">
+                            <Link to={`/service/${service._id}`} key={service._id}>
+                                <li className="col-span-1">
                                     <div className="border border-gray-400 rounded-md shadow-xl p-6 h-full flex flex-col gap-3 text-sm">
                                         <h2 className="text-center text-lg font-semibold">
                                             {service.title}

@@ -16,11 +16,18 @@ export const AuthController = ({ children }) => {
     console.log("isAuth : " + isAuthenticated)
     
     useEffect(() => {
-        let token = localStorage.getItem("userToken");
-
-        if(token){
-            setIsAuthenticated(true);
-            setUserToken(token);
+        try {
+            setIsLoading(true)
+            let token = localStorage.getItem("userToken");
+            if(token){
+                setIsAuthenticated(true);
+                setUserToken(token);
+            }
+        } catch (error) {
+            console.log(error);
+            
+        }finally{
+            setIsLoading(false)
         }
     }, [])
 
@@ -65,11 +72,14 @@ export const AuthController = ({ children }) => {
     const handleLogout = async () => {
 
         try {
+            setIsLoading(true)
             localStorage.removeItem("userToken");
             setIsAuthenticated(false);
             navigate("/");
         } catch (error) {
             console.log(error);
+        }finally{
+            setIsLoading(false)
         }
     }
     return (
@@ -87,7 +97,7 @@ export const AuthController = ({ children }) => {
                 userToken
             }}
         >
-            {children}
+            {!isLoading && children}
         </AuthContext.Provider>
     );
 };
